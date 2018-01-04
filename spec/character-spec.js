@@ -21,7 +21,10 @@ describe('Character', function() {
   });
 
   it('should be dead when health drops below 0', function(){
-
+    expect(character.health).toEqual(10);
+    expect(character.isDead).toEqual(false);
+    character.takeDamage(10);
+    expect(character.isDead).toEqual(true);
   });
 
 
