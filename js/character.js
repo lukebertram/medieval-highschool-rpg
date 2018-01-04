@@ -29,7 +29,12 @@
 }
 
 export class Nerd extends Character {
+  constructor(name){
+    super(name);
+    this.int = 3;
+    this.inventory=["protractor"];
 
+  }
 }
 
 export class Jock extends Character {

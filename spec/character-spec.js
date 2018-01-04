@@ -30,6 +30,6 @@ describe('Character', function() {
 
 });
 
-// describe('Nerd', function() {
-//
-// });
+describe('Nerd', function() {
+
+});

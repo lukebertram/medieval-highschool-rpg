@@ -1,5 +1,5 @@
 import {Character, Nerd, Jock, Goth} from './../js/character.js';
 
-// $(document).ready(function(){
-//
-// });
+$(document).ready(function(){
+
+});
