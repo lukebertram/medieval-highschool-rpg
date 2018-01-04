@@ -1,4 +1,4 @@
-class Character {
+ export class Character {
   constructor(name){
     this.name = name;
     this.health = 10;
@@ -24,18 +24,18 @@ class Character {
   }
 
   attack(){
-    
+
   }
 }
 
-class Nerd extends Character {
+export class Nerd extends Character {
 
 }
 
-class Jock extends Character {
+export class Jock extends Character {
 //strength
 }
 
-class Goth extends Character {
+export class Goth extends Character {
 //char
 }
