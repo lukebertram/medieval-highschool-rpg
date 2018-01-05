@@ -1,5 +1,5 @@
 
-### Gulp File Construction
+# JavaScript Project Construction
 
 The following sequence should leave you with a gulpfile that has all necessary
 tasks defined and appropriately configured .gitignore, .jshintrc, bower.json,
@@ -10,7 +10,7 @@ other files (like the "-interface" or frontend files).
 
 2. `$ npm init`
 
-3. install the following packages
+3. Install the following packages
     1. `$ npm i gulp --save-dev`
     2. `$ npm i browserify --save-dev`
     3. `$ npm i vinyl-source-stream --save-dev`
@@ -47,6 +47,13 @@ other files (like the "-interface" or frontend files).
 
 4. add `{"esversion": 6}` to .jshintrc
 
-5. `$bower init`
+5. `$ bower init`
 
-6.
+6. `$ node_modules/.bin/jasmine init`
+
+7. in package.JSON add the following:
+    ```
+    "scripts": {
+      "test": "jasmine"
+    }
+    ```
