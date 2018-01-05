@@ -39,7 +39,7 @@ other files (like the "-interface" or frontend files).
     26. `$ npm i babel-preset-es2015 --save-dev`
     27. `$ npm i babel-core --save-dev`
 
-    *_OR_*
+    **_OR_**
 
     Run the following command in your project dir:
 
@@ -51,9 +51,93 @@ other files (like the "-interface" or frontend files).
 
 6. `$ node_modules/.bin/jasmine init`
 
-7. in package.JSON add the following:
+7. in package.JSON add the following **(unless you're going to use Karma)**:
     ```
     "scripts": {
       "test": "jasmine"
     }
     ```
+8. `$ karma init` in the project directory
+
+9. Add the following to karma.conf.js :
+    ```
+    module.exports = function(config) {
+      config.set({
+        basePath: '',
+        frameworks: ['jquery-3.2.1', 'jasmine', 'browserify'],
+        files: [
+          'js/*.js',
+          'spec/*-spec.js',
+        ],
+        exclude: [
+        ],
+        preprocessors: {
+          'js/*.js': [ 'browserify'],
+          'spec/*.js': ['browserify'],
+        },
+        plugins: [
+          'karma-jquery',
+          'karma-browserify',
+          'karma-jasmine',
+          'karma-chrome-launcher',
+          'karma-jasmine-html-reporter'
+        ],
+
+        reporters: ['progress', 'kjhtml'],
+        port: 9876,
+        colors: true,
+        logLevel: config.LOG_INFO,
+        autoWatch: true,
+        browsers: ['Chrome'],
+        singleRun: false,
+        concurrency: Infinity
+      })
+    }
+    ```
+
+10. Add the following to package.JSON:
+    ```
+    "scripts" : {
+      "test" : "karma start karma.conf.js"
+    }
+    ```
+
+11. Add babelify task to gulpfile:
+  ```
+  ...
+  var babelify = require("babelify");
+  ...
+
+  gulp.task('jsBrowserify', ['concatInterface'], function() {
+    return browserify({ entries: ['./tmp/allConcat.js']})
+      .transform(babelify.configure({
+        presets: ["es2015"]
+      }))
+      .bundle()
+      .pipe(source('app.js'))
+      .pipe(gulp.dest('./build/js'))
+  });
+  ```
+
+12. Add Babel configuration to karma.conf.js :
+  ```
+  module.exports = function(config) {
+    config.set({
+      ...
+
+      preprocessors: {
+        ...
+      },
+      plugins: [
+        ...
+      ],
+      browserify: {
+        debug: true,
+        transform: [ [ 'babelify', {presets: ["es2015"]} ] ]
+      },
+
+      ...
+
+    })
+  }
+  ```
